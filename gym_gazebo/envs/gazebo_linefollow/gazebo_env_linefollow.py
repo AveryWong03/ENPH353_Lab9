@@ -89,33 +89,19 @@ class Gazebo_Linefollow_Env(gazebo_env.GazeboEnv):
 
             state[state_index] = 1
             self.timeout = 0
+            
+        else:
+            self.timeout += 1
 
         #image = cv2.putText(image, 'OpenCV', org, font, fontScale, color, thickness, cv2.LINE_AA)
         cv2.putText(cv_image,str(state),(10,30),cv2.FONT_HERSHEY_SIMPLEX,0.66,(255,0,0),2,cv2.LINE_AA)
         cv2.imshow("raw", cv_image)
         cv2.waitKey(1)
         
-        self.timeout += 1
         if(self.timeout > 30):
             done = True
         else:
             done = False
-
-        # TODO: Analyze the cv_image and compute the state array and
-        # episode termination condition. 
-        #
-        # The state array is a list of 10 elements indicating where in the
-        # image the line is:
-        # i.e.
-        #    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0] indicates line is on the left
-        #    [0, 0, 0, 0, 1, 0, 0, 0, 0, 0] indicates line is in the center
-        #
-        # The episode termination condition should be triggered when the line
-        # is not detected for more than 30 frames. In this case set the done
-        # variable to True.
-        #
-        # You can use the self.timeout variable to keep track of which frames
-        # have no line detected.
 
         return state, done
 

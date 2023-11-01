@@ -57,7 +57,12 @@ if __name__ == '__main__':
             qlearn.epsilon *= epsilon_discount
 
         observation = env.reset()
+
+        # Convert observation state from list to string
         state = ','.join(map(str, observation))
+        # observation = [1, 0, 0]
+        # obs1 = ['1', '0', '0']
+        # state = '1, 0, 0'
 
         # render() #defined above, not env.render()
 
@@ -86,8 +91,8 @@ if __name__ == '__main__':
         print("===== Completed episode {}".format(x))
 
         if highest_reward < cumulated_reward:
-                highest_reward = cumulated_reward
-                qlearn.saveQ("QValues")
+            highest_reward = cumulated_reward
+            qlearn.saveQ("QValues")
 
         if (x > 0) and (x % 5 == 0):
             plotter.plot(env)

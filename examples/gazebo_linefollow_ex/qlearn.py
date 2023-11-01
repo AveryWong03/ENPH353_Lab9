@@ -40,8 +40,6 @@ class QLearn:
             writer = csv.writer(file)
             writer.writerows(Q_csv)
 
-        print(self.q)
-
         print("Wrote to file: {}".format(filename+".pickle"))
 
     def getQ(self, state, action):
